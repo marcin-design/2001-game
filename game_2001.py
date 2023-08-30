@@ -38,7 +38,6 @@ def game():
                                Let's begin!
     
     Dice types in the game: D3, D4, D6, D8, D10, D12, D20, D100.
-    Press 'Enter' to use two D6 dices
     Otherwise choose them from the box and type the dice code like: D100
     """)
     user_points = 0
