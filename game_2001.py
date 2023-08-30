@@ -1,5 +1,7 @@
 import random
-#Typical dice tempalte: xDy+z
+
+
+# Typical dice tempalte: xDy+z
 def dice_roll(dice_code):
     POSSIBLE_DICES = {
         "D3",
@@ -31,12 +33,13 @@ def dice_roll(dice_code):
         return "Wrong Input"
     return sum([random.randint(1, dice_value) for _ in range(x)]) + y
 
+
 def game():
     print("""
                             Here is a 2001 game.
     Let's fight each other to collect 2001 points faster by using dice.
                                Let's begin!
-    
+
     Dice types in the game: D3, D4, D6, D8, D10, D12, D20, D100.
     Otherwise choose them from the box and type the dice code like: D100
     """)
@@ -99,5 +102,6 @@ def game():
             print("You won! (user)")
         if comp_points >= 100:
             print("I won! (comp)")
+
 
 game()

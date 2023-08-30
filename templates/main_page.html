@@ -5,18 +5,36 @@
 </head>
 <body>
     <h1>2001 Game</h1>
+    <form action="/" method="post">
+        <label for="dice_type">Choose type of the dice:</label>
+        <select id="dice_type" name="dice_type">
+            <option value="D3">D3</option>
+            <option value="D4">D4</option>
+            <option value="D6">D6</option>
+            <option value="D8">D8</option>
+            <option value="D10">D10</option>
+            <option value="D12">D12</option>
+            <option value="D20">D20</option>
+            <option value="D100">D100</option>
+        </select>
+        <select id="dice_type_2" name="dice_type_2">
+            <option value="D3">D3</option>
+            <option value="D4">D4</option>
+            <option value="D6">D6</option>
+            <option value="D8">D8</option>
+            <option value="D10">D10</option>
+            <option value="D12">D12</option>
+            <option value="D20">D20</option>
+            <option value="D100">D100</option>
+        </select>
+        <input type="submit" value="Roll Dice">
+    </form>
     <p>{{ user_result }}</p>
+    <p>{{ user_result_2 }}</p>
     <p>{{ comp_result }}</p>
+    <p>{{ comp_result_2 }}</p>
     <p>{{ result }}</p>
-    <input type="submit" name="D3" value="D3">
-    <input type="submit" name="D4" value="D4">
-    <input type="submit" name="D6" value="D6">
-    <input type="submit" name="D8" value="D8">
-    <input type="submit" name="D10" value="D10">
-    <input type="submit" name="D12" value="D12">
-    <input type="submit" name="D20" value="D20">
-    <input type="submit" name="D100" value="D100">
-    <input type="hidden" name="user_points" value="{user_points}">
-    <input type="hidden" name="comp_points" value="{comp_points}">
+    <p>Your current points: {{ user_points }}</p>
+    <p>My current points: {{ comp_points }}</p>
 </body>
 </html>
