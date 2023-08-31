@@ -72,7 +72,7 @@ def game():
             result = "I won! (comp)"
 
     return render_template('main_page.html',
-                           user_result=user_result, user_result_2=user_result_2, comp_result=comp_result,
+                           user_result=user_result, user_result_2=user_result_2, comp_result=comp_result, comp_result_2=comp_result_2,
                            result=result,
                            user_points=user_points,
                            comp_points=comp_points)
