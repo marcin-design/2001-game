@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        h1 {text-align: center;}
+        form {text-align: center;}
+        .points-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .user-points {
+            text-align: left;
+        }
+        .comp-points {
+            text-align: right;
+        }
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
     <title>2001 Game</title>
 </head>
 <body>
@@ -29,15 +48,21 @@
         </select>
         <input type="submit" value="Roll Dice">
     </form>
-    <form action="/reset" method="post">
-        <button type="submit">Reset Session</button>
-    </form>
+    <div class="buttons-container">
+        <form action="/reset" method="post">
+            <button type="submit">Points Reset</button>
+        </form>
+    </div>
     <p>{{ user_result }}</p>
     <p>{{ user_result_2 }}</p>
     <p>{{ comp_result }}</p>
     <p>{{ comp_result_2 }}</p>
     <p>{{ result }}</p>
-    <p>Your current points: {{ user_points }}</p>
-    <p>My current points: {{ comp_points }}</p>
+    <div class="user-container">
+        <p class="user-points">Your current points: {{ user_points }}</p>
+    </div>
+    <div class="comp-container">
+        <p class="comp-points">My current points: {{ comp_points }}</p>
+    </div>
 </body>
 </html>
