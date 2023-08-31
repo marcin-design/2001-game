@@ -26,7 +26,7 @@ def game():
     comp_result = ""
     comp_result_2 = ""
     result = ""
-    game_over = False  # Dodajemy zmienną do kontrolowania stanu gry
+    game_over = False
 
     if request.method == "POST":
         chosen_dice = request.form.get("dice_type")
@@ -92,7 +92,7 @@ def game():
                            result=result,
                            user_points=user_points,
                            comp_points=comp_points,
-                           game_over=game_over)  # Przekazujemy stan gry do szablonu
+                           game_over=game_over)
 
 @app.route("/reset", methods=["POST"])
 def reset_session():
