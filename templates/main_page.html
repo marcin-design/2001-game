@@ -3,15 +3,17 @@
 <head>
     <style>
         h1 {text-align: center;}
-        form {text-align: center;}
-        .points-container {
+        .container {
             display: flex;
             justify-content: space-between;
+            margin: 20px;
         }
-        .user-points {
+        .user-container, .comp-container {
+            flex: 1;
             text-align: left;
+            marin-left: 20x;
         }
-        .comp-points {
+        .comp-container {
             text-align: right;
         }
         .buttons-container {
@@ -19,50 +21,66 @@
             justify-content: center;
             margin-top: 20px;
         }
+        .result-message {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .centered-text {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
     </style>
     <title>2001 Game</title>
 </head>
 <body>
     <h1>2001 Game</h1>
-    <form action="/" method="post">
-        <label for="dice_type">Choose type of the dice:</label>
-        <select id="dice_type" name="dice_type">
-            <option value="D3">D3</option>
-            <option value="D4">D4</option>
-            <option value="D6">D6</option>
-            <option value="D8">D8</option>
-            <option value="D10">D10</option>
-            <option value="D12">D12</option>
-            <option value="D20">D20</option>
-            <option value="D100">D100</option>
-        </select>
-        <select id="dice_type_2" name="dice_type_2">
-            <option value="D3">D3</option>
-            <option value="D4">D4</option>
-            <option value="D6">D6</option>
-            <option value="D8">D8</option>
-            <option value="D10">D10</option>
-            <option value="D12">D12</option>
-            <option value="D20">D20</option>
-            <option value="D100">D100</option>
-        </select>
-        <input type="submit" value="Roll Dice">
-    </form>
+
+    <div class="container">
+        <div class="user-container">
+            <p>Your current points: {{ user_points }}</p>
+            <p>{{ user_result }}</p>
+            <p>{{ user_result_2 }}</p>
+        </div>
+
+        <div class="comp-container">
+            <p class="comp-points">My current points: {{ comp_points }}</p>
+            <p>{{ comp_result }}</p>
+            <p>{{ comp_result_2 }}</p>
+        </div>
+    </div>
+
     <div class="buttons-container">
+        <form action="/" method="post">
+            <label for="dice_type">Choose type of the dice:</label>
+            <select id="dice_type" name="dice_type">
+                <option value="D3">D3</option>
+                <option value="D4">D4</option>
+                <option value="D6">D6</option>
+                <option value="D8">D8</option>
+                <option value="D10">D10</option>
+                <option value="D12">D12</option>
+                <option value="D20">D20</option>
+                <option value="D100">D100</option>
+            </select>
+            <select id="dice_type_2" name="dice_type_2">
+                <option value="D3">D3</option>
+                <option value="D4">D4</option>
+                <option value="D6">D6</option>
+                <option value="D8">D8</option>
+                <option value="D10">D10</option>
+                <option value="D12">D12</option>
+                <option value="D20">D20</option>
+                <option value="D100">D100</option>
+            </select>
+            <input type="submit" value="Roll Dice">
+        </form>
         <form action="/reset" method="post">
             <button type="submit">Points Reset</button>
         </form>
     </div>
-    <p>{{ user_result }}</p>
-    <p>{{ user_result_2 }}</p>
-    <p>{{ comp_result }}</p>
-    <p>{{ comp_result_2 }}</p>
-    <p>{{ result }}</p>
-    <div class="user-container">
-        <p class="user-points">Your current points: {{ user_points }}</p>
-    </div>
-    <div class="comp-container">
-        <p class="comp-points">My current points: {{ comp_points }}</p>
-    </div>
+
+    <p class="result-message">{{ result }}</p>
 </body>
 </html>
