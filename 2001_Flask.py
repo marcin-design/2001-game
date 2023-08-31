@@ -32,11 +32,11 @@ def game():
         chosen_dice = request.form.get("dice_type")
         if not game_over:
             user_roll = dice_roll(int(chosen_dice[1:]))
-            user_result = f"Your first roll is: {user_roll}"
+            user_result = f"Your 1st roll is: {user_roll}"
 
             chosen_dice_2 = request.form.get("dice_type_2")
             user_roll_2 = dice_roll(int(chosen_dice_2[1:]))
-            user_result_2 = f"Your second roll: {user_roll_2}"
+            user_result_2 = f"Your 2nd roll: {user_roll_2}"
 
             comp_dice_code = random.choice(list(POSSIBLE_DICES))
             comp_roll = dice_roll(int(comp_dice_code[1:]))
@@ -74,10 +74,10 @@ def game():
                 game_over = True
 
             elif user_points >= 200:
-                result = "You won! (user)"
+                result = "You won!"
                 game_over = True
             elif comp_points >= 200:
-                result = "I won! (comp)"
+                result = "The computer won!"
                 game_over = True
 
             if game_over:

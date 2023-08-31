@@ -7,6 +7,19 @@
             display: flex;
             justify-content: space-between;
             margin: 20px;
+            background-color: #ffcc00;
+        }
+        h2 {text-align: center;}
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+        p {text-align: center;}
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
         }
         .user-container, .comp-container {
             flex: 1;
@@ -24,6 +37,8 @@
         .result-message {
             text-align: center;
             margin-top: 20px;
+            background-color: #913831;
+            color: #FFFFFF;
         }
         .centered-text {
             display: flex;
@@ -36,6 +51,9 @@
 </head>
 <body>
     <h1>2001 Game</h1>
+    <h2>Short information</h2>
+    <p>You can choose two dice per roll. The computer will choose random two dice</p>
+    <p>Try to whoop computer ass by gathering 2001 points before it will</p>
 
     <div class="container">
         <div class="user-container">
@@ -45,7 +63,7 @@
         </div>
 
         <div class="comp-container">
-            <p class="comp-points">My current points: {{ comp_points }}</p>
+            <p class="comp-points">The computer current points: {{ comp_points }}</p>
             <p>{{ comp_result }}</p>
             <p>{{ comp_result_2 }}</p>
         </div>
