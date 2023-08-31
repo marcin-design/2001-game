@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 import random
+import time
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
@@ -90,7 +91,8 @@ def game():
 @app.route("/reset", methods=["POST"])
 def reset_session():
     session.clear()
-    return "Session reset"
+    time.sleep(0.1)
+    return redirect(url_for('game'))
 
 if __name__ == "__main__":
     app.run(debug=True)
