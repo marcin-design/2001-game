@@ -29,66 +29,88 @@ def game():
     game_over = False
 
     if request.method == "POST":
-        chosen_dice = request.form.get("dice_type")
+        roll_button = request.form['roll_button']
         if not game_over:
-            user_roll = dice_roll(int(chosen_dice[1:]))
-            user_result = f"Your 1st roll is: {user_roll}"
+            if roll_button == "Roll Dice":
+                chosen_dice = request.form.get("dice_type")
+                user_roll = dice_roll(int(chosen_dice[1:]))
+                user_result = f"Your 1st roll is: {user_roll}"
 
-            chosen_dice_2 = request.form.get("dice_type_2")
-            user_roll_2 = dice_roll(int(chosen_dice_2[1:]))
-            user_result_2 = f"Your 2nd roll: {user_roll_2}"
+                chosen_dice_2 = request.form.get("dice_type_2")
+                user_roll_2 = dice_roll(int(chosen_dice_2[1:]))
+                user_result_2 = f"Your 2nd roll is: {user_roll_2}"
 
-            comp_dice_code = random.choice(list(POSSIBLE_DICES))
-            comp_roll = dice_roll(int(comp_dice_code[1:]))
-            comp_result = f"Comp 1st roll: {comp_roll}"
+                comp_dice_code = random.choice(list(POSSIBLE_DICES))
+                comp_roll = dice_roll(int(comp_dice_code[1:]))
+                comp_result = f"Comp 1st roll: {comp_roll}"
 
-            comp_dice_code_2 = random.choice(list(POSSIBLE_DICES))
-            comp_roll_2 = dice_roll(int(comp_dice_code_2[1:]))
-            comp_result_2 = f"Comp 2nd roll: {comp_roll_2}"
+                comp_dice_code_2 = random.choice(list(POSSIBLE_DICES))
+                comp_roll_2 = dice_roll(int(comp_dice_code_2[1:]))
+                comp_result_2 = f"Comp 2nd roll: {comp_roll_2}"
 
-            if user_roll == 7:
-                user_roll = user_roll // 7
-            if user_roll == 11:
-                user_roll = user_roll * 11
+            if roll_button == "Roll Random Dice":
+                chosen_dice = random.choice(list(POSSIBLE_DICES))
+                user_roll = dice_roll(int(chosen_dice[1:]))
+                user_result = f"Your 1st roll is: {user_roll}"
 
-            if user_roll_2 == 7:
-                user_roll_2 = user_roll_2 // 7
-            if user_roll_2 == 11:
-                user_roll_2 = user_roll_2 * 11
+                chosen_dice_2 = random.choice(list(POSSIBLE_DICES))
+                user_roll_2 = dice_roll(int(chosen_dice_2[1:]))
+                user_result_2 = f"Your 2nd roll is: {user_roll_2}"
 
-            if comp_roll == 7:
-                comp_roll = comp_roll // 7
-            if comp_roll == 11:
-                comp_roll = comp_roll * 11
+                comp_dice_code = random.choice(list(POSSIBLE_DICES))
+                comp_roll = dice_roll(int(comp_dice_code[1:]))
+                comp_result = f"Comp 1st roll: {comp_roll}"
 
-            if comp_roll_2 == 7:
-                comp_roll_2 = comp_roll_2 // 7
-            if comp_roll_2 == 11:
-                comp_roll_2 = comp_roll_2 * 11
+                comp_dice_code_2 = random.choice(list(POSSIBLE_DICES))
+                comp_roll_2 = dice_roll(int(comp_dice_code_2[1:]))
+                comp_result_2 = f"Comp 2nd roll: {comp_roll_2}"
 
-            user_points += user_roll + user_roll_2
-            comp_points += comp_roll + comp_roll_2
+                if user_roll == 7:
+                    user_roll = user_roll // 7
+                if user_roll == 11:
+                    user_roll = user_roll * 11
 
-            if user_points >= 200 and comp_points >= 200:
-                result = "It's a draw"
-                game_over = True
+                if user_roll_2 == 7:
+                    user_roll_2 = user_roll_2 // 7
+                if user_roll_2 == 11:
+                    user_roll_2 = user_roll_2 * 11
 
-            elif user_points >= 200:
-                result = "You won!"
-                game_over = True
-            elif comp_points >= 200:
-                result = "The computer won!"
-                game_over = True
+                if comp_roll == 7:
+                    comp_roll = comp_roll // 7
+                if comp_roll == 11:
+                    comp_roll = comp_roll * 11
 
-            if game_over:
-                session["user_points"] = 0
-                session["comp_points"] = 0
-            else:
-                session["user_points"] = user_points
-                session["comp_points"] = comp_points
+                if comp_roll_2 == 7:
+                    comp_roll_2 = comp_roll_2 // 7
+                if comp_roll_2 == 11:
+                    comp_roll_2 = comp_roll_2 * 11
+
+                user_points += user_roll + user_roll_2
+                comp_points += comp_roll + comp_roll_2
+
+                if user_points >= 200 and comp_points >= 200:
+                    result = "It's a draw"
+                    game_over = True
+
+                elif user_points >= 200:
+                    result = "You won!"
+                    game_over = True
+                elif comp_points >= 200:
+                    result = "The computer won!"
+                    game_over = True
+
+                if game_over:
+                    session["user_points"] = 0
+                    session["comp_points"] = 0
+                else:
+                    session["user_points"] = user_points
+                    session["comp_points"] = comp_points
 
     return render_template('main_page.html',
-                           user_result=user_result, user_result_2=user_result_2, comp_result=comp_result, comp_result_2=comp_result_2,
+                           user_result=user_result,
+                           user_result_2=user_result_2,
+                           comp_result=comp_result,
+                           comp_result_2=comp_result_2,
                            result=result,
                            user_points=user_points,
                            comp_points=comp_points,
