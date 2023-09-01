@@ -18,6 +18,7 @@ def game():
         session["user_points"] = 0
     if "comp_points" not in session:
         session["comp_points"] = 0
+    #Sessions are used to keep current points visible for the User
 
     user_points = session["user_points"]
     comp_points = session["comp_points"]
@@ -26,7 +27,7 @@ def game():
     comp_result = ""
     comp_result_2 = ""
     result = ""
-    game_over = False
+    game_over = False #The variable helps show a final message when changed to True.
 
     if request.method == "POST":
         roll_button = request.form['roll_button']
@@ -47,6 +48,7 @@ def game():
                 comp_dice_code_2 = random.choice(list(POSSIBLE_DICES))
                 comp_roll_2 = dice_roll(int(comp_dice_code_2[1:]))
                 comp_result_2 = f"Comp 2nd roll: {comp_roll_2}"
+            #"Roll Dice" button service (the User's choosing 2 specific dice)
 
             if roll_button == "Roll Random Dice":
                 chosen_dice = random.choice(list(POSSIBLE_DICES))
@@ -64,47 +66,50 @@ def game():
                 comp_dice_code_2 = random.choice(list(POSSIBLE_DICES))
                 comp_roll_2 = dice_roll(int(comp_dice_code_2[1:]))
                 comp_result_2 = f"Comp 2nd roll: {comp_roll_2}"
+            #"Roll Random Dice" button service (the User can use random dice)
 
-                if user_roll == 7:
-                    user_roll = user_roll // 7
-                if user_roll == 11:
-                    user_roll = user_roll * 11
+            user_points += user_roll + user_roll_2
+            comp_points += comp_roll + comp_roll_2
 
-                if user_roll_2 == 7:
-                    user_roll_2 = user_roll_2 // 7
-                if user_roll_2 == 11:
-                    user_roll_2 = user_roll_2 * 11
+            if user_roll == 7:
+                user_points = user_points // 7
+            if user_roll == 11:
+                user_points = user_points * 11
 
-                if comp_roll == 7:
-                    comp_roll = comp_roll // 7
-                if comp_roll == 11:
-                    comp_roll = comp_roll * 11
+            if user_roll_2 == 7:
+                user_points = user_points // 7
+            if user_roll_2 == 11:
+                user_points = user_points * 11
 
-                if comp_roll_2 == 7:
-                    comp_roll_2 = comp_roll_2 // 7
-                if comp_roll_2 == 11:
-                    comp_roll_2 = comp_roll_2 * 11
+            if comp_roll == 7:
+                comp_points = comp_points // 7
+            if comp_roll == 11:
+                comp_points = comp_points * 11
 
-                user_points += user_roll + user_roll_2
-                comp_points += comp_roll + comp_roll_2
+            if comp_roll_2 == 7:
+                comp_points = comp_points // 7
+            if comp_roll_2 == 11:
+                comp_points = comp_points * 11
+            #Concept to calculate two unique numbers - 7 and 11
 
-                if user_points >= 200 and comp_points >= 200:
-                    result = "It's a draw"
-                    game_over = True
+            if user_points >= 2001 and comp_points >= 2001:
+                result = "It's a draw"
+                game_over = True
 
-                elif user_points >= 200:
-                    result = "You won!"
-                    game_over = True
-                elif comp_points >= 200:
-                    result = "The computer won!"
-                    game_over = True
+            if user_points >= 2001:
+                result = "You won!"
+                game_over = True
+            if comp_points >= 2001:
+                result = "The computer won!"
+                game_over = True
+            #End-of-game messages
 
-                if game_over:
-                    session["user_points"] = 0
-                    session["comp_points"] = 0
-                else:
-                    session["user_points"] = user_points
-                    session["comp_points"] = comp_points
+            if game_over:
+                session["user_points"] = 0
+                session["comp_points"] = 0
+            else:
+                session["user_points"] = user_points
+                session["comp_points"] = comp_points
 
     return render_template('main_page.html',
                            user_result=user_result,
@@ -121,6 +126,7 @@ def reset_session():
     session.clear()
     time.sleep(0.1)
     return redirect(url_for('game'))
+#Session reset - redirecting to url from game function
 
 if __name__ == "__main__":
     app.run(debug=True)
